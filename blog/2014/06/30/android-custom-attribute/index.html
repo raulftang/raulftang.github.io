@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My Octopress Blog</title>
+  <title>Android Custom Attribute - My Octopress Blog</title>
   <meta name="author" content="Your Name">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://raulftang.github.io">
+  <link rel="canonical" href="http://raulftang.github.io/blog/2014/06/30/android-custom-attribute">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
@@ -63,15 +63,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/06/30/android-custom-attribute/">Android Custom Attribute</a></h1>
+      <h1 class="entry-title">Android Custom Attribute</h1>
     
     
       <p class="meta">
@@ -94,7 +91,7 @@
   </header>
 
 
-  <div class="entry-content"><p>Android中自定义属性的使用</p>
+<div class="entry-content"><p>Android中自定义属性的使用</p>
 
 <p>做Android布局是件很享受的事，这得益于他良好的xml方式。使用xml可以快速有效的为软件定义界面。可是有时候我们总感觉官方定义的一些基本组件不够用，自定义组件就不可避免了。那么如何才能做到像官方提供的那些组件一样用xml来定义他的属性呢？现在我们就来讨论一下他的用法。</p>
 
@@ -179,22 +176,16 @@ itemBg = a.getResourceId(R.styleable.ToolBar_itemBackground, -1);</p>
 
 <p>来获得对属性集的引用，然后就可以用“a”的各种方法来获取相应的属性值了。这里需要注意的是，如果使用的方法和获取值的类型不对的话，则会返回默认值。因此，如果一个属性是带两个及以上不用类型的属性，需要做多次判断，知道读取完毕后才能判断应该赋予何值。当然，在取完值的时候别忘了回收资源哦！</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/30/android-view-enter-slash-leave-screen-animation/">Android View Enter/leave Screen Animation</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Raulf</span></span>
+
+      
 
 
 
@@ -206,92 +197,38 @@ itemBg = a.getResourceId(R.styleable.ToolBar_itemBackground, -1);</p>
   
 
 
-<time datetime="2014-06-30T15:21:44+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2014</time>
-        
-      </p>
+<time datetime="2014-06-30T16:11:07+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/attribute/'>attribute</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://raulftang.github.io/blog/2014/06/30/android-custom-attribute/" data-via="" data-counturl="http://raulftang.github.io/blog/2014/06/30/android-custom-attribute/" >Tweet</a>
+  
+  
+  
+</div>
 
-
-  <div class="entry-content"><p>package com.feinno.jiosocial.ui.activitys.avchat;</p>
-
-<p>import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.FrameLayout;</p>
-
-<p>public class ExpandAnimation extends Animation {</p>
-
-<pre><code>private View mView;
-private ViewGroup.LayoutParams mViewLayoutParams;
-private int mMarginStart, mMarginEnd;
-private boolean mIsVisibleAfter = false;
-private boolean mWasEndedAlready = false;
-private boolean mFromBottom = false;
-
-/**
- * Initialize the animation
- * @param view The layout we want to animate
- * @param duration The duration of the animation, in ms
- * @param fromBottom The layout is at the bottom or top of screen
- */
-public ExpandAnimation(View view, int duration, boolean fromBottom) {
-    setDuration(duration);
-    mView = view;
-
-    mViewLayoutParams = mView.getLayoutParams();
-    int bMargin = 0;
-    int tMargin = 0;
-    if(mViewLayoutParams instanceof LinearLayout.LayoutParams) {
-        bMargin = ((LinearLayout.LayoutParams)mViewLayoutParams).bottomMargin;
-        tMargin = ((LinearLayout.LayoutParams)mViewLayoutParams).topMargin;
-    } else if(mViewLayoutParams instanceof RelativeLayout.LayoutParams) {
-        bMargin = ((RelativeLayout.LayoutParams)mViewLayoutParams).bottomMargin;
-        tMargin = ((RelativeLayout.LayoutParams)mViewLayoutParams).topMargin;
-    } else if(mViewLayoutParams instanceof FrameLayout.LayoutParams) {
-        bMargin = ((FrameLayout.LayoutParams)mViewLayoutParams).bottomMargin;
-        tMargin = ((FrameLayout.LayoutParams)mViewLayoutParams).topMargin;
-    }
-    // decide to show or hide the view
-
-    mFromBottom = fromBottom;
-    if(mFromBottom) {
-        mMarginStart = bMargin;         
-    } else {
-        mMarginStart = tMargin;
-    }
-
-    if(mMarginStart == 0) {
-        mMarginEnd = (0 - mView.getHeight()) - 1;
-        mIsVisibleAfter = true;
-    } else {
-        mMarginEnd = 0;
-        mIsVisibleAfter = false;
-    }
-    mView.setVisibility(View.VISIBLE);
-}
-</code></pre>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/30/android-view-enter-slash-leave-screen-animation/" title="Previous Post: Android view enter/leave screen animation">&laquo; Android view enter/leave screen animation</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/30/android-view-enter-slash-leave-screen-animation/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -315,6 +252,7 @@ public ExpandAnimation(View view, int duration, boolean fromBottom) {
 
   
 </aside>
+
 
     </div>
   </div>
