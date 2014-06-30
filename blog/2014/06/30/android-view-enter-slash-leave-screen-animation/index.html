@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My Octopress Blog</title>
+  <title>Android View Enter/leave Screen Animation - My Octopress Blog</title>
   <meta name="author" content="Your Name">
 
   
@@ -20,7 +20,7 @@ import android.view.animation.Animation; &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://raulftang.github.io">
+  <link rel="canonical" href="http://raulftang.github.io/blog/2014/06/30/android-view-enter-slash-leave-screen-animation">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
@@ -65,15 +65,12 @@ import android.view.animation.Animation; &hellip;">
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/06/30/android-view-enter-slash-leave-screen-animation/">Android View Enter/leave Screen Animation</a></h1>
+      <h1 class="entry-title">Android View Enter/leave Screen Animation</h1>
     
     
       <p class="meta">
@@ -96,7 +93,7 @@ import android.view.animation.Animation; &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>package com.feinno.jiosocial.ui.activitys.avchat;</p>
+<div class="entry-content"><p>package com.feinno.jiosocial.ui.activitys.avchat;</p>
 
 <p>import android.view.View;
 import android.view.ViewGroup;
@@ -161,23 +158,115 @@ public ExpandAnimation(View view, int duration, boolean fromBottom) {
 }
 </code></pre>
 
+<!-- more -->
+
+
+<pre><code>@Override
+protected void applyTransformation(float interpolatedTime, Transformation t) {
+    super.applyTransformation(interpolatedTime, t);
+
+    int margin = 0;
+    boolean needUpdate = false;
+    if (interpolatedTime &lt; 1.0f) {
+        // Calculating the new bottom margin
+        margin = mMarginStart
+                + (int) ((mMarginEnd - mMarginStart) * interpolatedTime);
+        needUpdate = true;
+    } else if(!mWasEndedAlready) {
+        margin = mMarginEnd;
+        needUpdate = true;
+    }
+
+    if(needUpdate) {
+        if(mViewLayoutParams instanceof LinearLayout.LayoutParams) {
+            if(mFromBottom) {
+                ((LinearLayout.LayoutParams)mViewLayoutParams).bottomMargin = margin;
+            } else {
+                ((LinearLayout.LayoutParams)mViewLayoutParams).topMargin = margin;
+            }
+
+        } else if(mViewLayoutParams instanceof RelativeLayout.LayoutParams) {               
+            if(mFromBottom) {
+                ((RelativeLayout.LayoutParams)mViewLayoutParams).bottomMargin = margin;
+            } else {
+                ((RelativeLayout.LayoutParams)mViewLayoutParams).topMargin = margin;
+            }
+
+        } else if(mViewLayoutParams instanceof FrameLayout.LayoutParams) {              
+            if(mFromBottom) {
+                ((FrameLayout.LayoutParams)mViewLayoutParams).bottomMargin = margin;
+            } else {
+                ((FrameLayout.LayoutParams)mViewLayoutParams).topMargin = margin;
+            }           
+        }
+
+        mView.requestLayout();
+    }
+
+    if (interpolatedTime &lt; 1.0f) {
+
+    }else if (!mWasEndedAlready) {
+        if (mIsVisibleAfter) {
+            mView.setVisibility(View.GONE);
+        }
+        mWasEndedAlready = true;
+    }
+}
+</code></pre>
+
+<p>}</p>
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/30/android-view-enter-slash-leave-screen-animation/">Read on &rarr;</a>
-    </footer>
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2014-06-30T15:21:44+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2014</time>
+      
+
+<span class="categories">
   
-  <div class="pagination">
+    <a class='category' href='/blog/categories/android/'>Android</a>, <a class='category' href='/blog/categories/animation/'>animation</a>
+  
+</span>
+
+
+    </p>
     
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://raulftang.github.io/blog/2014/06/30/android-view-enter-slash-leave-screen-animation/" data-via="" data-counturl="http://raulftang.github.io/blog/2014/06/30/android-view-enter-slash-leave-screen-animation/" >Tweet</a>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -197,6 +286,7 @@ public ExpandAnimation(View view, int duration, boolean fromBottom) {
 
   
 </aside>
+
 
     </div>
   </div>
