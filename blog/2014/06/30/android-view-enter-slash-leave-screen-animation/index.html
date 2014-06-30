@@ -136,11 +136,8 @@ public ExpandAnimation(View view, int duration, boolean fromBottom) {
         tMargin = ((FrameLayout.LayoutParams)mViewLayoutParams).topMargin;
     }
     // decide to show or hide the view
-</code></pre>
 
-<p>//        mIsVisibleAfter = (view.getVisibility() == View.VISIBLE);</p>
-
-<pre><code>    mFromBottom = fromBottom;
+    mFromBottom = fromBottom;
     if(mFromBottom) {
         mMarginStart = bMargin;         
     } else {
