@@ -15,7 +15,9 @@ In the words of Abraham Lincoln:
 # Quoting code #
 \```
 git status
+
 git add
+
 git commit
 \```
 
@@ -29,11 +31,11 @@ You can make an unordered list by preceding one or more lines of text with \- or
 
 To order your list, precede each line with a number.
 
-\1. James Madison
+1. James Madison
 
-\2. James Monroe
+2. James Monroe
 
-\3. John Quincy Adams
+3. John Quincy Adams
 # Task lists #
 \- [x] Finish my changes
 
