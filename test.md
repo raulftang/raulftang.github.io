@@ -14,11 +14,13 @@ In the words of Abraham Lincoln:
 \[test\]\(raulftang.github.io/test.md)
 # Quoting code #
 \```
+
 git status
 
 git add
 
 git commit
+
 \```
 
 Use \`git status\` to list all new or modified files
